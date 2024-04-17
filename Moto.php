@@ -78,8 +78,10 @@ class Moto{
     public function darPrecioVernta(){
         $_venta=-1;
 
-        if($this->getActiva()){
-            
+        if($this->getActiva()=="false"){
+            $_venta=-1;
+        }else{
+  
             $anioActual = intval(date("Y"));
             $_anio=$anioActual-$this->getAnioFab();
             $_venta = $this->getCosto()+$this->getCosto()*($_anio*$this->getPorctIA());
