@@ -56,5 +56,13 @@ class Venta{
         $this->precioFinal=$pFinal;
     }
 
+    public function __toString(){
+        $cadena="Numero: ". $this->getNumero."\n";
+        $cadena=$cadena."Fecha: ".$this->getFecha."\n";
+        $cadena=$cadena."Refercencia al cliente: ".$this->getRefCliente."\n";
+        $cadena=$cadena."Coleccion de motos: ".$this->getColeccionDMotos."\n";
+        $cadena=$cadena."Precio final".$this->getPrecioFinal."\n";
+       }
+
 
 }
