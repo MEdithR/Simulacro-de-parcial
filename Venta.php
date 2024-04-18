@@ -2,15 +2,15 @@
 class Venta{
     private $nummero;
     private $fecha;
-    private $refCliente;
+    private $objCliente;
     private $coleccionDMotos;
     private $precioFinal;
     
-    public function __construc($num,$fecha,$refCli,$colDMoto,$pFinal){
+    public function __construc($num,$fecha,$objCli,$colDMoto,$pFinal){
 
     $this->numero=$num;
     $this->fecha=$fecha;
-    $this->refCliente=$refCli;
+    $this->objCliente=$objCli;
     $this->coleccionDMotos=$colDMoto;
     $this->precioFinal=$pFinal;
      
@@ -24,8 +24,8 @@ class Venta{
         return $this->fecha;
     }
 
-    public function getRefCliente(){
-        return $this->refCliente;
+    public function getObjCliente(){
+        return $this->objCliente;
     }
 
     public function getColeccionDMotos(){
@@ -44,8 +44,8 @@ class Venta{
         $this->fecha=$fecha;
     }
 
-    public function setRefCliente($refCli){
-        $this->refCliente=$refCli;
+    public function setObjCliente($objCli){
+        $this->objCliente=$objCli;
     }
 
     public function setColeccionDMotos($colDMoto){
@@ -57,12 +57,41 @@ class Venta{
     }
 
     public function __toString(){
-        $cadena="Numero: ". $this->getNumero."\n";
-        $cadena=$cadena."Fecha: ".$this->getFecha."\n";
-        $cadena=$cadena."Refercencia al cliente: ".$this->getRefCliente."\n";
-        $cadena=$cadena."Coleccion de motos: ".$this->getColeccionDMotos."\n";
-        $cadena=$cadena."Precio final".$this->getPrecioFinal."\n";
-       }
+        $cadena="Venta: ". $this->getNumero."\n";
+        $cadena .="Fecha: ".$this->getFecha."\n";
+        $cadena .="Refercencia al cliente: ".$this->getObjCliente."\n";
+        $cadena .="Coleccion de motos: ---- \n".$this->getColeccionDMotos."---- "."\n";
+        $cadena .="Precio final".$this->getPrecioFinal."\n";
+        return $cadena;
+    }
 
+ /**retona en strin la coleccion de motos
+  * @return string 
+  */
 
+    public function stringDcolMotos(){
+        $cadena="";
+        $motos=$this->getColeccionDMotos;
+
+        for($i = 0 ; $i < count($motos) ; $i++){
+            $cadena=$cadena."Moto N° [".$i."]: \n".$motos[$i]."\n ----? \n";
+        }
+        return $cadena;
+
+    }
+
+    public function incormpoarMoto($objMoto){
+        
+        if($objMoto->getActiva()){
+            $arrayMotos=$this->getColeccionDMotos;
+            array_push($arrayMotos,$objMoto);
+            $this->setColeccionDMotos($arrayMotos);
+            
+            $precioMoto=$objMoto->darPreciodarPrecioVenta();
+            $precioFinalM=$this->getPrecioFinal;
+            $precioFinalM=$precioFinalM+$precioMoto;
+            $this->setPrecioFinal($precioFinal);
+
+        }
+    }
 }

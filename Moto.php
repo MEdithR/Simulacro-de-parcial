@@ -66,7 +66,16 @@ class Moto{
         $this->activa=$acti;
     }
 
-    
+    public function __toString(){
+        $cadena="Codigo: ". $this->getCodigo."\n ";
+        $cadena=$cadena. "Costo: ".$this->getCosto."\n";
+        $cadena=$cadena. "Año de fabricación: ".$this->getAnioFab."\n ";
+        $cadena=$cadena. "Descripcion: ".$this->getDescripcion."\n";
+        $cadena=$cadena. "Porcentaje de incremento anual: ".$this->getPorctIA."\n";
+        $cadena=$cadena. "Activa".$this->getActiva."\n";
+
+        return $cadena;
+    }
  /*Implementar el método darPrecioVenta el cual calcula el valor por el cual puede ser vendida una moto.
  Si la moto no se encuentra disponible para la venta retorna un valor < 0. Si la moto está disponible para
  la venta, el método realiza el siguiente cálculo:
@@ -75,21 +84,18 @@ class Moto{
  anio: cantidad de años transcurridos desde que se fabricó la moto.
  por_inc_anual: porcentaje de incremento anual de la moto*/
 
-    public function darPrecioVernta(){
+    public function darPrecioVenta(){
         $_venta=-1;
 
         if($this->getActiva()=="false"){
             $_venta=-1;
         }else{
   
-            $anioActual = intval(date("Y"));
-            $_anio=$anioActual-$this->getAnioFab();
-            $_venta = $this->getCosto()+$this->getCosto()*($_anio*$this->getPorctIA());
+            $_anio=date("Y")-$this->getAnioFab();
+            $_venta = $this->getCosto()+($this->getCosto()*($_anio*$this->getPorctIA()));
 
         }
         return $_venta;
     } 
-    public function __toString(){
-        return $this->getCodigo." ".$this->getCosto." ".$this->getAnioFab." ".$this->getDescripcion." ".$this->getPorctIA." ".$this->getActiva."\n";
-    }
+    
 }
